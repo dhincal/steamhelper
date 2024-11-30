@@ -1,7 +1,10 @@
 import Image from "next/image";
 import FeatCard from "./components/featCard";
+import { getServerSession } from "next-auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession();
+
   return (
     <div className="lg:px-8 w-screen">
       <div className="flex flex-col justify-center align-middle items-center gap-y-8 h-[60vh]">
@@ -11,9 +14,13 @@ export default function Home() {
             Just the right tools for your steam library
           </h3>
         </div>
-        <a className="bg-blue-600 rounded-lg py-1 w-2/12 text-center text-slate-300 cursor-pointer">
-          Login Via Steam
-        </a>
+        {session ? (
+          <img src={session.user?.image ?? ""}></img>
+        ) : (
+          <a className="bg-blue-600 rounded-lg py-1 w-2/12 text-center text-slate-300 cursor-pointer">
+            Login Via Steam
+          </a>
+        )}
       </div>
       <div className="flex flex-col gap-y-12 py-16">
         <h1 className="text-blue-600 text-3xl font-bold text-center">
