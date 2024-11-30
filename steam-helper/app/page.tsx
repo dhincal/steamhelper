@@ -21,29 +21,29 @@ export default function Home() {
         </h1>
         <div className="flex flex-row flex-wrap justify-center gap-y-10 gap-x-20">
           <FeatCard
-            title="Game Library"
-            desc="Manage your game library with ease"
+            title="AI Game Recommender"
+            desc="AI Tool that recommends games based on your preferences"
             icon="/icons/game.svg"
             link="/game"
             className=""
           />
           <FeatCard
-            title="Game Library"
-            desc="Manage your game library with ease"
+            title="Analyze Discount"
+            desc="Analyzes the discount of a game and tells you if it's worth it"
             icon="/icons/game.svg"
             link="/game"
             className=""
           />
           <FeatCard
-            title="Game Library"
-            desc="Manage your game library with ease"
+            title="Explore Games"
+            desc="Gives you new games to explore based on your preferences"
             icon="/icons/game.svg"
             link="/game"
             className=""
           />
           <FeatCard
-            title="Game Library"
-            desc="Manage your game library with ease"
+            title="Random Game Picker"
+            desc="If you don't know what to play, let us pick a game for you"
             icon="/icons/game.svg"
             link="/game"
             className=""
