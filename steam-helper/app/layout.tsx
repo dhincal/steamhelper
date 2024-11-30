@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={``}>
-        <nav className="flex flex-row p-8 justify-between bg-slate-900 border-b border-blue-600">
+        <nav className="flex flex-row p-8 justify-between bg-slate-900">
           <div className="w-8 h-8 bg-blue-600" />
           <div className="flex flex-row text-blue-600 gap-x-8 align-middle items-center">
             <div className="flex flex-row gap-x-6 align-middle items-center text-base">
