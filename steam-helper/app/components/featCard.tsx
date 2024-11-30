@@ -16,7 +16,7 @@ export default function FeatCard({
       href={link}
       className={
         className +
-        ` flex flex-col gap-y-3 px-4 py-12 rounded-lg justify-center items-center cursor-pointer bg-blue-600 w-60`
+        ` flex flex-col gap-y-3 px-4 py-12 rounded-lg justify-center items-center cursor-pointer bg-blue-600 w-72`
       }
     >
       <div className="w-8 h-8 bg-stone-200" /> {/* Placeholder for icon */}
