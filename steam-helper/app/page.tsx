@@ -1,5 +1,6 @@
 import Image from "next/image";
 import FeatCard from "./components/featCard";
+import { FiThumbsUp, FiPieChart, FiMap, FiDivideCircle } from "react-icons/fi";
 import { getServerSession } from "next-auth";
 
 export default async function Home() {
@@ -30,28 +31,28 @@ export default async function Home() {
           <FeatCard
             title="AI Game Recommender"
             desc="AI Tool that recommends games based on your preferences"
-            icon="/icons/game.svg"
+            icon={<FiThumbsUp fontSize={48} stroke="#e7e5e4" />}
             link="/game"
             className=""
           />
           <FeatCard
             title="Analyze Discount"
             desc="Analyzes the discount of a game and tells you if it's worth it"
-            icon="/icons/game.svg"
+            icon={<FiPieChart fontSize={48} stroke="#e7e5e4" />}
             link="/game"
             className=""
           />
           <FeatCard
             title="Explore Games"
             desc="Gives you new games to explore based on your preferences"
-            icon="/icons/game.svg"
+            icon={<FiMap fontSize={48} stroke="#e7e5e4" />}
             link="/game"
             className=""
           />
           <FeatCard
             title="Random Game Picker"
             desc="If you don't know what to play, let us pick a game for you"
-            icon="/icons/game.svg"
+            icon={<FiDivideCircle fontSize={48} stroke="#e7e5e4" />}
             link="/game"
             className=""
           />
