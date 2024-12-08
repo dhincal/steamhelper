@@ -1,11 +1,50 @@
+"use client";
 import Image from "next/image";
 import FeatCard from "./components/featCard";
 import { FiThumbsUp, FiPieChart, FiMap, FiDivideCircle } from "react-icons/fi";
 import { getServerSession } from "next-auth";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { env } from "process";
 
-export default async function Home() {
-  const session = await getServerSession();
+interface SteamUser {
+  steamid?: string;
+  // Add other properties if needed
+}
 
+interface SessionData {
+  user: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    steam?: SteamUser;
+  };
+}
+
+export default function Home() {
+  const { data } = useSession() as { data: SessionData | null };
+  const herokuProxy = process.env.HEROKU_PROXY;
+
+  const userOwnedGames = async () => {
+    // Getting cross origin error, need to fix
+
+    if (data) {
+      const userSteamId = data.user.steam?.steamid;
+      const fetchLink = `https://${herokuProxy}.herokuapp.com/https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=14C4E27A43FC801B629A1E3C08DF5E1F&steamid=${userSteamId}
+&format=json`;
+
+      const request = new Request(fetchLink, {
+        method: "GET",
+      });
+
+      const response = await fetch(request);
+
+      const games = await response.json();
+
+      console.log(games);
+    }
+  };
+
+  userOwnedGames();
   return (
     <div className="lg:px-8 w-screen">
       <div className="flex flex-col justify-center align-middle items-center gap-y-8 h-[60vh]">
@@ -15,8 +54,8 @@ export default async function Home() {
             Just the right tools for your steam library
           </h3>
         </div>
-        {session ? (
-          <img src={session.user?.image ?? ""}></img>
+        {data ? (
+          <img src={data.user?.image ?? ""}></img>
         ) : (
           <a className="bg-blue-600 rounded-lg py-1 w-2/12 text-center text-slate-300 cursor-pointer">
             Login Via Steam
