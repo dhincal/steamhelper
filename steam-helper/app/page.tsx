@@ -1,10 +1,12 @@
+"use client";
 import Image from "next/image";
 import FeatCard from "./components/featCard";
 import { FiThumbsUp, FiPieChart, FiMap, FiDivideCircle } from "react-icons/fi";
 import { getServerSession } from "next-auth";
+import { useSession, signIn, signOut } from "next-auth/react";
 
-export default async function Home() {
-  const session = await getServerSession();
+export default function Home() {
+  const { data } = useSession();
 
   return (
     <div className="lg:px-8 w-screen">
@@ -15,8 +17,8 @@ export default async function Home() {
             Just the right tools for your steam library
           </h3>
         </div>
-        {session ? (
-          <img src={session.user?.image ?? ""}></img>
+        {data ? (
+          <img src={data.user?.image ?? ""}></img>
         ) : (
           <a className="bg-blue-600 rounded-lg py-1 w-2/12 text-center text-slate-300 cursor-pointer">
             Login Via Steam
