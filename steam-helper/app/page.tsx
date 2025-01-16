@@ -23,28 +23,50 @@ interface SessionData {
 export default function Home() {
   const { data } = useSession() as { data: SessionData | null };
   const herokuProxy = process.env.HEROKU_PROXY;
+  const userSteamId = data?.user.steam?.steamid;
 
   const userOwnedGames = async () => {
-    // Getting cross origin error, need to fix
-
     if (data) {
-      const userSteamId = data.user.steam?.steamid;
       const fetchLink = `https://${herokuProxy}.herokuapp.com/https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=14C4E27A43FC801B629A1E3C08DF5E1F&steamid=${userSteamId}
-&format=json`;
-
-      const request = new Request(fetchLink, {
+      &format=json`;
+      const requestProp = {
         method: "GET",
-      });
-
-      const response = await fetch(request);
-
-      const games = await response.json();
-
-      console.log(games);
+      };
+      const response = await fetch(fetchLink, requestProp);
+      const rawData = await response.json();
+      const games = rawData.response;
+      return games;
     }
   };
 
-  userOwnedGames();
+  // const sortGames = async () => {
+  //   const gamesObject = await userOwnedGames();
+  //   const gamesCount = gamesObject.game_count;
+  //   const gameLibrary = gamesObject.games;
+
+  //   let gamesList = [];
+
+  //   for (let i = 0; i < gamesCount; i++) {
+  //     const appID = gameLibrary[i].appid;
+  //     console.log(appID);
+  //     const gameFetchLink = `https://${herokuProxy}.herokuapp.com/http://store.steampowered.com/api/appdetails?appids=${appID}`;
+  //     const requestProp = {
+  //       method: "GET",
+  //     };
+  //     const gameResponse = await fetch(gameFetchLink, requestProp);
+  //     console.log(gameResponse);
+  //     const rawData = await gameResponse.json();
+  //     const games = rawData.body;
+
+  //     //gamesList.push(gameData.);
+  //     console.log(games);
+  //   }
+
+  //   //return gamesList;
+  // };
+
+  //const userGamesName = sortGames();
+
   return (
     <div className="lg:px-8 w-screen">
       <div className="flex flex-col justify-center align-middle items-center gap-y-8 h-[60vh]">
